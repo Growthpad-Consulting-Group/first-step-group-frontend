@@ -40,7 +40,7 @@ export default function ProductDetail({ product }: { product: Product }) {
                 key={image}
                 onClick={() => setActiveImage(index)}
                 className={`relative h-20 w-20 overflow-hidden rounded-lg border-2 ${
-                  index === activeImage ? 'border-black dark:border-white' : 'border-transparent'
+                  index === activeImage ? 'border-gold' : 'border-transparent'
                 }`}
               >
                 <Image src={image} alt="" fill className="object-cover" />
@@ -56,10 +56,12 @@ export default function ProductDetail({ product }: { product: Product }) {
         transition={{ duration: 0.4 }}
         className="flex flex-col"
       >
-        <h1 className="text-3xl font-semibold tracking-tight">{product.name}</h1>
+        <h1 className="font-display text-3xl font-semibold tracking-tight">{product.name}</h1>
 
         <div className="mt-4 flex items-center gap-3 text-xl">
-          <span>{formatPrice(product.price)}</span>
+          <span className="font-medium text-slate dark:text-zinc-300">
+            {formatPrice(product.price)}
+          </span>
           {product.compareAtPrice && (
             <span className="text-zinc-400 line-through">
               {formatPrice(product.compareAtPrice)}
@@ -74,7 +76,7 @@ export default function ProductDetail({ product }: { product: Product }) {
         )}
 
         <div className="mt-8 flex items-center gap-4">
-          <div className="flex items-center gap-4 rounded-full border border-black/10 px-4 py-2 dark:border-white/20">
+          <div className="flex items-center gap-4 rounded-md border border-black/10 px-4 py-2 dark:border-white/20">
             <button
               onClick={() => setQuantity((q) => Math.max(1, q - 1))}
               aria-label="Decrease quantity"
@@ -93,7 +95,7 @@ export default function ProductDetail({ product }: { product: Product }) {
           <button
             onClick={() => addItem(product, quantity)}
             disabled={product.stock === 0}
-            className="flex-1 rounded-full bg-black px-8 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40 dark:bg-white dark:text-black"
+            className="flex-1 rounded-md bg-gold px-8 py-3 text-sm font-medium text-ink transition-colors hover:bg-gold-light disabled:cursor-not-allowed disabled:opacity-40"
           >
             {product.stock === 0 ? 'Sold out' : 'Add to cart'}
           </button>

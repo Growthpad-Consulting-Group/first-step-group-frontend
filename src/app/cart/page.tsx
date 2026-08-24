@@ -14,10 +14,10 @@ export default function CartPage() {
   if (items.length === 0) {
     return (
       <div className="mx-auto max-w-7xl px-6 py-24 text-center">
-        <h1 className="text-2xl font-semibold">Your cart is empty</h1>
+        <h1 className="font-display text-2xl font-semibold">Your cart is empty</h1>
         <Link
           href="/products"
-          className="mt-6 inline-flex items-center rounded-full bg-black px-8 py-3 text-sm font-medium text-white dark:bg-white dark:text-black"
+          className="mt-6 inline-flex items-center rounded-md bg-gold px-8 py-3 text-sm font-medium text-ink transition-colors hover:bg-gold-light"
         >
           Continue shopping
         </Link>
@@ -27,7 +27,7 @@ export default function CartPage() {
 
   return (
     <div className="mx-auto max-w-5xl px-6 py-16">
-      <h1 className="mb-10 text-3xl font-semibold tracking-tight">Your Cart</h1>
+      <h1 className="font-display mb-10 text-3xl font-semibold tracking-tight">Your Cart</h1>
 
       <ul className="flex flex-col divide-y divide-black/5 dark:divide-white/10">
         {items.map((item) => (
@@ -45,10 +45,12 @@ export default function CartPage() {
 
             <div className="flex-1">
               <p className="font-medium">{item.product.name}</p>
-              <p className="mt-1 text-sm text-zinc-500">{formatPrice(item.product.price)}</p>
+              <p className="mt-1 text-sm text-slate dark:text-zinc-400">
+                {formatPrice(item.product.price)}
+              </p>
             </div>
 
-            <div className="flex items-center gap-3 rounded-full border border-black/10 px-3 py-1.5 dark:border-white/20">
+            <div className="flex items-center gap-3 rounded-md border border-black/10 px-3 py-1.5 dark:border-white/20">
               <button
                 onClick={() => updateQuantity(item.product._id, Math.max(1, item.quantity - 1))}
                 aria-label="Decrease quantity"
@@ -82,11 +84,11 @@ export default function CartPage() {
       <div className="mt-10 flex flex-col items-end gap-4 border-t border-black/5 pt-8 dark:border-white/10">
         <div className="flex w-full max-w-xs items-center justify-between text-lg font-medium">
           <span>Subtotal</span>
-          <span>{formatPrice(totalPrice)}</span>
+          <span className="text-slate dark:text-zinc-300">{formatPrice(totalPrice)}</span>
         </div>
         <Link
           href="/checkout"
-          className="w-full max-w-xs rounded-full bg-black px-8 py-3 text-center text-sm font-medium text-white transition-opacity hover:opacity-90 dark:bg-white dark:text-black"
+          className="w-full max-w-xs rounded-md bg-gold px-8 py-3 text-center text-sm font-medium text-ink transition-colors hover:bg-gold-light"
         >
           Proceed to checkout
         </Link>

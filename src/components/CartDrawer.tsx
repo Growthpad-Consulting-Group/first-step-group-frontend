@@ -31,7 +31,7 @@ export default function CartDrawer() {
             className="fixed right-0 top-0 z-50 flex h-full w-full max-w-md flex-col bg-white shadow-xl dark:bg-zinc-950"
           >
             <div className="flex items-center justify-between border-b border-black/5 px-6 py-5 dark:border-white/10">
-              <h2 className="text-lg font-semibold">Your Cart</h2>
+              <h2 className="font-display text-lg font-semibold">Your Cart</h2>
               <button
                 onClick={closeCart}
                 className="flex h-9 w-9 items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/10"
@@ -71,10 +71,10 @@ export default function CartDrawer() {
                             <Trash2 className="h-4 w-4" />
                           </button>
                         </div>
-                        <p className="text-sm text-zinc-500">
+                        <p className="text-sm text-slate dark:text-zinc-400">
                           {formatPrice(item.product.price)}
                         </p>
-                        <div className="mt-1 flex w-fit items-center gap-3 rounded-full border border-black/10 px-2 py-1 dark:border-white/20">
+                        <div className="mt-1 flex w-fit items-center gap-3 rounded-md border border-black/10 px-2 py-1 dark:border-white/20">
                           <button
                             onClick={() =>
                               updateQuantity(item.product._id, Math.max(1, item.quantity - 1))
@@ -104,12 +104,12 @@ export default function CartDrawer() {
               <div className="border-t border-black/5 px-6 py-5 dark:border-white/10">
                 <div className="mb-4 flex items-center justify-between text-sm font-medium">
                   <span>Subtotal</span>
-                  <span>{formatPrice(totalPrice)}</span>
+                  <span className="text-slate dark:text-zinc-300">{formatPrice(totalPrice)}</span>
                 </div>
                 <Link
                   href="/checkout"
                   onClick={closeCart}
-                  className="flex w-full items-center justify-center rounded-full bg-black px-5 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90 dark:bg-white dark:text-black"
+                  className="flex w-full items-center justify-center rounded-md bg-gold px-5 py-3 text-sm font-medium text-ink transition-colors hover:bg-gold-light"
                 >
                   Checkout
                 </Link>

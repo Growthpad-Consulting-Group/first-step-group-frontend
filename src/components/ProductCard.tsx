@@ -44,7 +44,9 @@ export default function ProductCard({ product }: { product: Product }) {
             <h3 className="text-sm font-medium">{product.name}</h3>
           </Link>
           <div className="mt-1 flex items-center gap-2 text-sm">
-            <span>{formatPrice(product.price)}</span>
+            <span className="font-medium text-slate dark:text-zinc-300">
+              {formatPrice(product.price)}
+            </span>
             {product.compareAtPrice && (
               <span className="text-zinc-400 line-through">
                 {formatPrice(product.compareAtPrice)}
@@ -56,7 +58,7 @@ export default function ProductCard({ product }: { product: Product }) {
         <button
           onClick={() => addItem(product)}
           disabled={product.stock === 0}
-          className="mt-0.5 rounded-full border border-black/10 px-3 py-1.5 text-xs font-medium transition-colors hover:bg-black hover:text-white disabled:cursor-not-allowed disabled:opacity-40 dark:border-white/20 dark:hover:bg-white dark:hover:text-black"
+          className="mt-0.5 rounded-md border border-gold/40 px-3 py-1.5 text-xs font-medium text-ink transition-colors hover:border-gold hover:bg-gold hover:text-ink disabled:cursor-not-allowed disabled:opacity-40 dark:border-gold/30 dark:text-white dark:hover:bg-gold dark:hover:text-ink"
         >
           {product.stock === 0 ? 'Sold out' : 'Add'}
         </button>
