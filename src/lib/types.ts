@@ -38,6 +38,8 @@ export interface Product {
   specSheetUrl?: string;
   installationAvailable: boolean;
   installationPrice?: number;
+  /** Admin-curated highlight, e.g. brand/collection "Selected for First Step" galleries. */
+  featured: boolean;
   /** The central commerce rule: `buy` shows price + cart actions, `poa` hides price and shows enquiry actions. */
   purchaseMode: PurchaseMode;
   /** USD. Present only when purchaseMode === 'buy'. */

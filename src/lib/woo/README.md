@@ -20,6 +20,7 @@ The storefront's `Product` model needs data Woo doesn't expose by default. Confi
 | `Brand` | One of First Step's 9 carried brands | e.g. `Kohler`, `Grohe` |
 | `Finish` | The only variation axis the storefront supports | e.g. `Chrome`, `Supersteel` |
 | `Installation` | Presence of this attribute marks installation as an available add-on | any value |
+| `Featured` | Presence marks a product as admin-curated for highlight galleries (brand pages' "Selected for First Step" section, etc.) | any value |
 
 **Department** (Bathroom & Wet Rooms / Kitchen & Surfaces / Climate Control / Home Technology)
 is read from the product's Woo **category**, not an attribute — create these as top-level

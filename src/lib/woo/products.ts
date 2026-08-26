@@ -87,6 +87,7 @@ function mapProduct(wc: WooProduct): Product {
   const brand = findAttributeOptions(wc, 'Brand')[0];
   const finishes = findAttributeOptions(wc, 'Finish');
   const installationOptions = findAttributeOptions(wc, 'Installation');
+  const featuredOptions = findAttributeOptions(wc, 'Featured');
 
   return {
     id: String(wc.id),
@@ -103,6 +104,7 @@ function mapProduct(wc: WooProduct): Product {
     specs: [],
     specSheetUrl: findMetaValue(wc, '_spec_sheet_url'),
     installationAvailable: installationOptions.length > 0,
+    featured: featuredOptions.length > 0,
     purchaseMode,
     price: purchaseMode === 'buy' && wc.price ? Number(wc.price) : undefined,
     compareAtPrice:

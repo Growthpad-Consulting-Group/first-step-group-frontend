@@ -36,9 +36,13 @@ export default async function BrandPage({ params }: Props) {
   // Brand is a local (non-global) Woo attribute, so it isn't filterable via Woo's REST
   // API — same tradeoff as the department page's brand filter (see lib/woo/README.md).
   const result = await getProducts({ limit: 60 }).catch(() => null);
-  const products = (result?.items ?? []).filter(
+  const brandProducts = (result?.items ?? []).filter(
     (p) => p.brand?.toLowerCase() === brand.name.toLowerCase(),
   );
+  // Prefer the admin-curated "Featured" set (matches Figma's "Selected for First Step"
+  // galleries); fall back to showing everything until products are actually curated.
+  const featured = brandProducts.filter((p) => p.featured);
+  const products = featured.length > 0 ? featured : brandProducts;
 
   const relatedBrands = BRANDS.filter((b) => b.slug !== brand.slug).slice(0, 3);
 
