@@ -32,7 +32,7 @@ export default async function ProductsPage({
 
   return (
     <div className="container-fluid py-16">
-      <h1 className="font-display mb-10 text-3xl font-semibold tracking-tight">Shop</h1>
+      <h1 className="font-display mb-10 text-3xl font-light tracking-tight">Shop</h1>
 
       {!result || result.items.length === 0 ? (
         <p className="rounded-2xl border border-dashed border-black/10 p-12 text-center text-sm text-ink-light dark:border-white/10">

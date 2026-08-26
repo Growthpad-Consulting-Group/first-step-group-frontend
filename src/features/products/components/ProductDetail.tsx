@@ -56,7 +56,7 @@ export default function ProductDetail({ product }: { product: Product }) {
         transition={{ duration: 0.4 }}
         className="flex flex-col"
       >
-        <h1 className="font-display text-3xl font-semibold tracking-tight">{product.name}</h1>
+        <h1 className="font-display text-3xl font-light tracking-tight">{product.name}</h1>
 
         <div className="mt-4 flex items-center gap-3 text-xl">
           <span className="font-medium text-slate dark:text-cream">

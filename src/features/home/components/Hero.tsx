@@ -48,7 +48,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="font-display mt-4 max-w-2xl text-4xl font-semibold leading-tight tracking-tight text-white sm:text-6xl"
+          className="font-display mt-4 max-w-2xl text-4xl font-light leading-tight tracking-tight text-white sm:text-6xl"
         >
           Luxury starts with the right first step.
         </motion.h1>

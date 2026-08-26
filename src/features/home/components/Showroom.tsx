@@ -5,27 +5,25 @@ import Image from 'next/image';
 import { Icon } from '@iconify/react';
 import { motion } from 'framer-motion';
 
-const FEATURES = [
-  {
-    title: '1 Dungarvan West Road, Harare',
-    description: 'Borrowdale, Zimbabwe — easy access with parking on site.',
-  },
-  {
-    title: 'Live podcast studio',
-    description: 'We host design and lifestyle conversations right from our showroom floor.',
-  },
-  {
-    title: 'Modern & Victorian styles',
-    description: 'See both contemporary and classic finishing collections in person.',
-  },
+const HOURS = [
+  { day: 'Monday – Friday', time: '8:00 – 17:00' },
+  { day: 'Saturday', time: '9:00 – 13:00' },
+  { day: 'Sunday', time: 'By appointment' },
 ];
 
-const DETAILS = [
-  { label: 'Address', value: '1 Dungarvan West Rd, Borrowdale, Harare' },
-  { label: 'Hours', value: 'Mon – Fri 08:00 – 17:00' },
-  { label: 'Phone', value: '1 Dungarvan West Rd Borrowdale, Harare' },
-  { label: 'WhatsApp', value: '+27 769 730 167' },
+const VISIT_HIGHLIGHTS = [
+  { icon: 'solar:layers-linear', label: 'See every finish' },
+  { icon: 'solar:tuning-2-linear', label: 'Compare materials' },
+  { icon: 'solar:chat-square-linear', label: 'Expert guidance' },
 ];
+
+function IconBadge({ icon }: { icon: string }) {
+  return (
+    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-slate text-white">
+      <Icon icon={icon} className="h-5 w-5" />
+    </span>
+  );
+}
 
 export default function Showroom() {
   return (
@@ -34,51 +32,99 @@ export default function Showroom() {
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
+          viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.5 }}
-          className="flex flex-col items-start pt-14 sm:pt-20 lg:py-28"
+          className="flex flex-col items-start py-14 sm:py-20"
         >
-          <h4 className="text-[10px] font-medium uppercase tracking-[0.2em] text-gold-dark">
+          <h4 className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gold">
             Our Showroom
           </h4>
-          <h3 className="font-display mt-3 text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
-            Touch it, feel it, live in it.
+          <h3 className="font-display mt-3 text-2xl font-light uppercase tracking-tight text-ink sm:text-3xl">
+            Touch it. <br />
+            Feel it. Live in it.
           </h3>
-          <p className="mt-4 text-base leading-relaxed text-slate">
-            Our Borrowdale showroom is more than a product floor — it&apos;s an
-            experience. See every finish, compare materials, and get expert
-            guidance before you decide.
+          <p className="mt-4 max-w-lg text-base leading-relaxed text-ink-light">
+            Our Borrowdale showroom is more than a product floor—it&apos;s an
+            experience. See every finish, compare materials and get expert
+            guidance for your project.
           </p>
 
-          <ul className="mt-6 flex flex-col gap-4">
-            {FEATURES.map((feature) => (
-              <li key={feature.title} className="flex items-start gap-4">
-                <Icon
-                  icon="gg:check-o"
-                  className="mt-0.5 h-6 w-6 shrink-0 text-ink"
-                />
-                <div>
-                  <p className="font-bold text-ink">{feature.title}</p>
-                  <p className="mt-1 text-sm text-slate">{feature.description}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
+          <div className="mt-8 w-full rounded-md bg-cream-dark p-6 sm:p-8">
+            <div className="flex items-start gap-4">
+              <IconBadge icon="solar:map-point-linear" />
+              <div>
+                <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-gold">
+                  Visit Us
+                </p>
+                <p className="mt-1 text-sm font-medium text-ink">
+                  Borrowdale, Harare, Zimbabwe
+                </p>
+                <p className="mt-1 flex items-center gap-2 text-sm text-ink-light">
+                  <Icon icon="solar:phone-linear" className="h-4 w-4" />
+                  +263 78 230 418
+                </p>
+              </div>
+            </div>
 
-          <div className="mt-6 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
+            <div className="my-6 border-t border-ink/10" />
+
+            <div className="flex items-start gap-4">
+              <IconBadge icon="solar:clock-circle-linear" />
+              <div>
+                <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-gold">
+                  Opening Hours
+                </p>
+                <div className="mt-1 grid grid-cols-[auto_1fr] gap-x-8 gap-y-1 text-sm text-ink">
+                  {HOURS.map((row) => (
+                    <span key={row.day} className="contents">
+                      <span>{row.day}</span>
+                      <span className="text-ink-light">{row.time}</span>
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="my-6 border-t border-ink/10" />
+
+            <div className="flex items-center gap-3 text-sm text-ink-light">
+              <Icon
+                icon="solar:calendar-linear"
+                className="h-5 w-5 shrink-0 text-gold"
+              />
+              Walk-ins are welcome. Reserve a consultation for dedicated project
+              time.
+            </div>
+          </div>
+
+          <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center">
             <Link
               href="/enquire"
-              className="inline-flex items-center justify-center rounded-md bg-gold px-8 py-4 text-xs font-semibold uppercase tracking-widest text-ink transition-colors hover:bg-gold-light"
+              className="inline-flex items-center justify-center gap-2 rounded-xs bg-gold px-8 py-4 text-xs font-semibold uppercase tracking-widest text-ink transition-colors hover:bg-gold-light"
             >
+              <Icon icon="solar:calendar-linear" className="h-4 w-4" />
               Book a Visit
             </Link>
             <Link
               href="https://wa.me/27769730167"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-md border border-black/10 bg-white px-8 py-4 text-xs font-semibold uppercase tracking-widest text-ink transition-colors hover:bg-cream-dark"
+              className="inline-flex items-center justify-center gap-2 rounded-xs bg-slate px-8 py-4 text-xs font-semibold uppercase tracking-widest text-cream transition-colors hover:bg-slate-light"
             >
+              <Icon icon="mdi:whatsapp" className="h-4 w-4" />
               WhatsApp Us
+            </Link>
+            <Link
+              href="https://maps.google.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 rounded-xs border border-ink px-8 py-4 text-xs font-semibold uppercase tracking-widest text-ink transition-colors hover:bg-ink/5"
+            >
+              <Icon
+                icon="qlementine-icons:gps-compass-16"
+                className="h-4 w-4"
+              />
+              Get Directions
             </Link>
           </div>
         </motion.div>
@@ -86,13 +132,13 @@ export default function Showroom() {
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
+          viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="flex flex-col pb-14 sm:pb-20 lg:h-full lg:pb-0"
+          className="flex flex-col py-14 sm:py-20 lg:h-full"
         >
-          <div className="relative aspect-[4/3] w-full overflow-hidden lg:aspect-auto lg:min-h-0 lg:flex-1">
+          <div className="relative aspect-4/3 w-full overflow-hidden lg:aspect-auto lg:min-h-0 lg:flex-1">
             <Image
-              src="/images/showroom.webp"
+              src="/images/showroom.jpg"
               alt="Inside the First Step showroom"
               fill
               className="object-cover"
@@ -100,15 +146,26 @@ export default function Showroom() {
             />
           </div>
 
-          <div className="grid grid-cols-1 gap-6 bg-ink p-8 sm:grid-cols-2">
-            {DETAILS.map((detail) => (
-              <div key={detail.label}>
-                <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-gold-light">
-                  {detail.label}
-                </p>
-                <p className="mt-2 text-sm text-white">{detail.value}</p>
-              </div>
-            ))}
+          <div className="flex flex-col gap-6 bg-slate p-8 sm:p-10">
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold">
+                Why Visit In Person
+              </p>
+              <h3 className="font-display mt-3 text-xl font-light uppercase tracking-tight text-cream sm:text-2xl">
+                See the details before you decide.
+              </h3>
+            </div>
+            <div className="flex flex-wrap gap-x-8 gap-y-3">
+              {VISIT_HIGHLIGHTS.map((item) => (
+                <span
+                  key={item.label}
+                  className="flex items-center gap-2 text-sm font-medium text-cream"
+                >
+                  <Icon icon={item.icon} className="h-4 w-4 text-gold" />
+                  {item.label}
+                </span>
+              ))}
+            </div>
           </div>
         </motion.div>
       </div>

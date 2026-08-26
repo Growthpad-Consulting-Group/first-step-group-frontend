@@ -12,7 +12,7 @@ export default function CheckoutPage() {
   if (items.length === 0) {
     return (
       <div className="container-fluid py-24 text-center">
-        <h1 className="font-display text-2xl font-semibold">Nothing to check out</h1>
+        <h1 className="font-display text-2xl font-light">Nothing to check out</h1>
         <Link
           href="/products"
           className="mt-6 inline-flex items-center rounded-md bg-gold px-8 py-3 text-sm font-medium text-ink transition-colors hover:bg-gold-light"
@@ -26,7 +26,7 @@ export default function CheckoutPage() {
   return (
     <div className="mx-auto grid max-w-6xl grid-cols-1 gap-12 px-6 py-16 lg:grid-cols-2">
       <div>
-        <h1 className="font-display mb-8 text-2xl font-semibold tracking-tight">Shipping details</h1>
+        <h1 className="font-display mb-8 text-2xl font-light tracking-tight">Shipping details</h1>
         <form className="flex flex-col gap-4">
           <input
             className="rounded-lg border border-black/10 px-4 py-3 text-sm outline-none focus:border-gold dark:border-white/20 dark:bg-transparent dark:focus:border-gold"
@@ -79,7 +79,7 @@ export default function CheckoutPage() {
       </div>
 
       <div>
-        <h2 className="font-display mb-6 text-lg font-semibold">Order summary</h2>
+        <h2 className="font-display mb-6 text-lg font-light">Order summary</h2>
         <ul className="flex flex-col divide-y divide-black/5 dark:divide-white/10">
           {items.map((item) => (
             <li key={item.product._id} className="flex items-center justify-between py-4 text-sm">

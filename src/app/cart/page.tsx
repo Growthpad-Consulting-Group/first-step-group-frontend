@@ -14,7 +14,7 @@ export default function CartPage() {
   if (items.length === 0) {
     return (
       <div className="container-fluid py-24 text-center">
-        <h1 className="font-display text-2xl font-semibold">Your cart is empty</h1>
+        <h1 className="font-display text-2xl font-light">Your cart is empty</h1>
         <Link
           href="/products"
           className="mt-6 inline-flex items-center rounded-md bg-gold px-8 py-3 text-sm font-medium text-ink transition-colors hover:bg-gold-light"
@@ -27,7 +27,7 @@ export default function CartPage() {
 
   return (
     <div className="mx-auto max-w-5xl px-6 py-16">
-      <h1 className="font-display mb-10 text-3xl font-semibold tracking-tight">Your Cart</h1>
+      <h1 className="font-display mb-10 text-3xl font-light tracking-tight">Your Cart</h1>
 
       <ul className="flex flex-col divide-y divide-black/5 dark:divide-white/10">
         {items.map((item) => (

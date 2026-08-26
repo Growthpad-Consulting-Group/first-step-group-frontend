@@ -31,7 +31,7 @@ export default function Footer() {
             <h4 className="text-[10px] font-medium uppercase tracking-[0.2em] text-gold-light">
               Get in Touch
             </h4>
-            <h3 className="font-display mt-3 text-2xl font-semibold tracking-tight text-white sm:text-3xl">
+            <h3 className="font-display mt-3 text-2xl font-light tracking-tight text-white sm:text-3xl">
               Luxury starts with <br/> the first step.
             </h3>
           </div>

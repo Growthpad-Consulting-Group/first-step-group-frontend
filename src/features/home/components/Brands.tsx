@@ -1,6 +1,8 @@
 'use client';
 
+import Link from 'next/link';
 import Image from 'next/image';
+import { Icon } from '@iconify/react';
 import { motion } from 'framer-motion';
 
 interface Brand {
@@ -8,22 +10,15 @@ interface Brand {
   src: string;
 }
 
-const ROW_ONE: Brand[] = [
+const BRANDS: Brand[] = [
   { name: 'Victoria + Albert', src: '/brands/victoria-albert.webp' },
-  { name: 'Grohe', src: '/brands/GROHE.webp' },
   { name: 'Kohler', src: '/brands/kohler.webp' },
+  { name: 'Grohe', src: '/brands/GROHE.webp' },
   { name: 'Hansgrohe', src: '/brands/hansgrohe.webp' },
   { name: 'SMEG', src: '/brands/smeg.webp' },
-];
-
-const ROW_TWO: Brand[] = [
-  { name: 'Cosentino', src: '/brands/cosentino.webp' },
-  { name: 'Dado Quartz', src: '/brands/dadoquartz.webp' },
   { name: 'Franke', src: '/brands/franke.webp' },
-  { name: 'Meir', src: '/brands/meir.webp' },
+  { name: 'Cosentino', src: '/brands/cosentino.webp' },
 ];
-
-const ALL_BRANDS = [...ROW_ONE, ...ROW_TWO];
 
 function BrandCard({ brand, index }: { brand: Brand; index: number }) {
   return (
@@ -32,7 +27,7 @@ function BrandCard({ brand, index }: { brand: Brand; index: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-40px' }}
       transition={{ duration: 0.4, delay: 0.05 * index }}
-      className="flex aspect-[3/2] w-full items-center justify-center rounded-md bg-white p-4 transition-transform hover:-translate-y-1 sm:w-44 sm:p-6"
+      className="flex aspect-3/2 w-full items-center justify-center rounded-sm bg-white p-6 transition-transform hover:-translate-y-1"
     >
       <div className="relative h-full w-full">
         <Image
@@ -40,7 +35,7 @@ function BrandCard({ brand, index }: { brand: Brand; index: number }) {
           alt={brand.name}
           fill
           className="object-contain"
-          sizes="176px"
+          sizes="200px"
         />
       </div>
     </motion.div>
@@ -49,36 +44,30 @@ function BrandCard({ brand, index }: { brand: Brand; index: number }) {
 
 export default function Brands() {
   return (
-    <section className="bg-slate py-14 sm:py-28">
+    <section className="bg-slate-muted py-14 sm:py-20">
       <div className="container-fluid">
-        <div className="mb-10 text-left sm:mb-14">
-          <h4 className="text-[10px] font-medium uppercase tracking-[0.2em] text-gold-light">
-            Our Brands
-          </h4>
-          <h3 className="font-display mt-3 text-xl font-semibold tracking-tight text-white sm:text-3xl">
-            World-class brands, delivered to your door
-          </h3>
+        <div className="mb-10 flex flex-col items-start justify-between gap-6 sm:mb-14 sm:flex-row sm:items-center">
+          <div>
+            <h4 className="text-[10px] font-medium uppercase tracking-[0.2em] text-gold-light">
+              Brands We Carry
+            </h4>
+            <h3 className="font-display mt-3 text-xl font-light uppercase tracking-tight text-white sm:text-3xl">
+              World-class brands, <br /> delivered to your door.
+            </h3>
+          </div>
+          <Link
+            href="/brands"
+            className="inline-flex shrink-0 items-center gap-2 rounded-xs bg-gold px-6 py-3 text-xs font-semibold uppercase tracking-widest text-ink transition-colors hover:bg-gold-light"
+          >
+            View All Brands
+            <Icon icon="solar:arrow-right-linear" className="h-4 w-4" />
+          </Link>
         </div>
 
-        {/* Mobile: simple 2-column grid */}
-        <div className="grid grid-cols-2 gap-3 sm:hidden">
-          {ALL_BRANDS.map((brand, index) => (
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 lg:grid-cols-7">
+          {BRANDS.map((brand, index) => (
             <BrandCard key={brand.name} brand={brand} index={index} />
           ))}
-        </div>
-
-        {/* Desktop: 5-then-4 centered rows */}
-        <div className="hidden flex-col items-center gap-4 sm:flex">
-          <div className="flex flex-wrap justify-center gap-4">
-            {ROW_ONE.map((brand, index) => (
-              <BrandCard key={brand.name} brand={brand} index={index} />
-            ))}
-          </div>
-          <div className="flex flex-wrap justify-center gap-4">
-            {ROW_TWO.map((brand, index) => (
-              <BrandCard key={brand.name} brand={brand} index={ROW_ONE.length + index} />
-            ))}
-          </div>
         </div>
       </div>
     </section>

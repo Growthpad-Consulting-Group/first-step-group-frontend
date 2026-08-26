@@ -87,7 +87,7 @@ function CollectionCard({
           <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-light">
             {card.label}
           </span>
-          <h3 className="font-display text-3xl font-semibold uppercase tracking-tight text-white sm:text-4xl">
+          <h3 className="font-display text-3xl font-light uppercase tracking-tight text-white sm:text-4xl">
             {card.title}
           </h3>
           <p className="max-w-md text-sm leading-relaxed text-cream sm:text-base">
@@ -129,7 +129,7 @@ export default function Collections() {
           <h4 className="text-[10px] font-medium uppercase tracking-[0.2em] text-gold-dark dark:text-gold-light">
             Our Collections
           </h4>
-          <h3 className="font-display mt-3 text-2xl font-semibold tracking-tight text-ink dark:text-white sm:text-3xl">
+          <h3 className="font-display mt-3 text-2xl font-light tracking-tight text-ink dark:text-white sm:text-3xl">
             Crafted for the discerning home
           </h3>
         </div>

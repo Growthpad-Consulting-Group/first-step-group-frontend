@@ -2,38 +2,41 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
+import { Icon } from '@iconify/react';
 import { motion } from 'framer-motion';
 
 interface Article {
   image: string;
-  caption: string;
+  category: string;
+  title: string;
   excerpt: string;
-  tag: string;
   href: string;
 }
 
 const ARTICLES: Article[] = [
   {
-    image: '/images/bathroom.webp',
-    caption: 'Design Trends',
+    image: '/images/journal-timeless-bathroom.jpg',
+    category: 'Design Trends',
+    title: 'How to Build a Timeless Bathroom',
     excerpt:
-      'Five bathroom finishes every luxury home in Zimbabwe should consider this year',
-    tag: 'Bathroom & Wet Rooms',
-    href: '/journal/bathroom-finishes',
+      'A considered approach to materials, proportions and finishes that will age beautifully.',
+    href: '/journal/timeless-bathroom',
   },
   {
-    image: '/images/showroom.webp',
-    caption: 'Podcast',
-    excerpt: 'Luxury living in Zimbabwe — what it means, and where it’s going',
-    tag: 'Episode 1',
-    href: '/journal/luxury-living-zimbabwe',
+    image: '/images/journal-design-process.jpg',
+    category: 'Podcast',
+    title: 'Inside the Design Process',
+    excerpt:
+      'Conversations with designers and makers shaping refined spaces across the region.',
+    href: '/journal/inside-the-design-process',
   },
   {
-    image: '/images/kitchen.webp',
-    caption: 'Project Spotlight',
-    excerpt: 'Inside a Borrowdale kitchen transformation using Franke & Dado Quartz',
-    tag: 'Kitchen & Surfaces',
-    href: '/journal/borrowdale-kitchen',
+    image: '/images/journal-borrowdale-home.jpg',
+    category: 'Project Spotlight',
+    title: 'A Borrowdale Home in Quiet Balance',
+    excerpt:
+      'A closer look at the details behind a calm, tactile and carefully resolved interior.',
+    href: '/journal/borrowdale-home-quiet-balance',
   },
 ];
 
@@ -41,22 +44,30 @@ export default function Insights() {
   return (
     <section className="bg-slate py-20 sm:py-28">
       <div className="container-fluid">
-        <div className="mb-14 flex items-end justify-between gap-6">
-          <div className="text-left">
-            <h4 className="text-[10px] font-medium uppercase tracking-[0.2em] text-gold-light">
-              Insights
+        <div className="mb-14 grid grid-cols-1 gap-6 lg:grid-cols-2 lg:items-start">
+          <div>
+            <h4 className="text-[13px] font-semibold uppercase tracking-[0.2em] text-gold">
+              Journal
             </h4>
-            <h3 className="font-display mt-3 text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-              Design thinking<br/> from Borrowdale
+            <h3 className="font-display mt-4 text-3xl font-light uppercase tracking-tight text-white lg:text-[40px]">
+              Design Thinking
+              <br />
+              From Borrowdale
             </h3>
           </div>
 
-          <Link
-            href="/journal"
-            className="hidden shrink-0 items-center rounded-md bg-gold px-6 py-3 text-xs font-semibold uppercase tracking-widest text-ink transition-colors hover:bg-gold-light sm:inline-flex"
-          >
-            All Articles
-          </Link>
+          <div className="flex flex-col items-start gap-6 lg:ml-auto">
+            <p className="max-w-md text-lg leading-normal text-white">
+              Stories, ideas and expert perspectives for considered homes.
+            </p>
+            <Link
+              href="/journal"
+              className="inline-flex shrink-0 items-center gap-2 rounded-xs bg-gold px-6 py-3 text-xs font-semibold uppercase tracking-widest text-ink transition-colors hover:bg-gold-light"
+            >
+              View All Journal
+              <Icon icon="solar:arrow-right-linear" className="h-4 w-4" />
+            </Link>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
@@ -67,39 +78,40 @@ export default function Insights() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.4, delay: 0.1 * index }}
+              className="h-full"
             >
-              <Link href={article.href} className="group block overflow-hidden bg-white">
-                <div className="relative aspect-[4/3] w-full overflow-hidden">
+              <Link
+                href={article.href}
+                className="group flex h-full flex-col overflow-hidden rounded-lg bg-[#1b3c3c]"
+              >
+                <div className="relative aspect-4/3 w-full overflow-hidden">
                   <Image
                     src={article.image}
-                    alt={article.excerpt}
+                    alt={article.title}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                     sizes="(min-width: 640px) 33vw, 100vw"
                   />
-                  <span className="absolute bottom-4 left-4 rounded-md bg-ink/80 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.2em] text-white">
-                    {article.caption}
-                  </span>
                 </div>
-                <div className="p-6">
-                  <p className="text-base font-normal leading-snug text-ink">
+                <div className="flex flex-1 flex-col p-7">
+                  <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-gold">
+                    {article.category}
+                  </span>
+                  <h3 className="font-display mt-3 text-2xl font-normal uppercase tracking-tight text-white">
+                    {article.title}
+                  </h3>
+                  <p className="mt-4 text-lg leading-relaxed text-white">
                     {article.excerpt}
                   </p>
-                  <span className="mt-4 inline-block text-xs font-medium uppercase tracking-widest text-slate">
-                    {article.tag}
+                  <span className="mt-auto inline-flex items-center gap-2 pt-6 text-xs font-semibold uppercase tracking-widest text-gold">
+                    Read Article
+                    <Icon icon="solar:arrow-right-linear" className="h-3.5 w-3.5" />
                   </span>
                 </div>
               </Link>
             </motion.div>
           ))}
         </div>
-
-        <Link
-          href="/journal"
-          className="mt-10 inline-flex w-full items-center justify-center rounded-md bg-gold px-6 py-3 text-xs font-semibold uppercase tracking-widest text-ink transition-colors hover:bg-gold-light sm:hidden"
-        >
-          All Articles
-        </Link>
       </div>
     </section>
   );

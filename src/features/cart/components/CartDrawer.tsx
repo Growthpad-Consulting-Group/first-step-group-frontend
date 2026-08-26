@@ -31,7 +31,7 @@ export default function CartDrawer() {
             className="fixed right-0 top-0 z-50 flex h-full w-full max-w-md flex-col bg-white shadow-xl dark:bg-ink"
           >
             <div className="flex items-center justify-between border-b border-black/5 px-6 py-5 dark:border-white/10">
-              <h2 className="font-display text-lg font-semibold">Your Cart</h2>
+              <h2 className="font-display text-lg font-light">Your Cart</h2>
               <button
                 onClick={closeCart}
                 className="flex h-9 w-9 items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/10"
