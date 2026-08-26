@@ -31,7 +31,7 @@ export default function Header() {
       className="sticky top-0 z-40 bg-slate"
     >
       <div className="container-fluid grid grid-cols-2 items-center py-3 sm:grid-cols-[1fr_auto_1fr]">
-        <Link href="/" className="flex items-center">
+        <Link href="/" className="flex w-fit items-center">
           <Image
             src="/logo.svg"
             alt="First Step — Premium Building"

@@ -183,6 +183,15 @@ export async function getProductBySlug(slug: string): Promise<Product> {
   return mapProduct(product);
 }
 
+/** Batch fetch by Woo product id — used for related products / bundle bars. */
+export async function getProductsByIds(ids: string[]): Promise<Product[]> {
+  if (ids.length === 0) return [];
+  const data = await wooFetch<WooProduct[]>('/products', {
+    searchParams: { include: ids.join(','), per_page: ids.length },
+  });
+  return data.map(mapProduct);
+}
+
 export async function getCategories(): Promise<Category[]> {
   const categories = await wooFetch<WooCategory[]>('/products/categories', {
     searchParams: { per_page: 100, hide_empty: false },

@@ -10,7 +10,14 @@ import InquireButton from '@/shared/ui/InquireButton';
 const formatPrice = (value: number) =>
   new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
 
-export default function ProductCard({ product }: { product: Product }) {
+export default function ProductCard({
+  product,
+  featured = false,
+}: {
+  product: Product;
+  /** Larger image + visible summary, for a single lead product in a grid. */
+  featured?: boolean;
+}) {
   const { addItem } = useCart();
   const isPoa = product.purchaseMode === 'poa';
 
@@ -22,8 +29,10 @@ export default function ProductCard({ product }: { product: Product }) {
       transition={{ duration: 0.4 }}
       className="group flex flex-col"
     >
-      <Link href={`/products/${product.slug}`} className="block">
-        <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl bg-cream-dark dark:bg-slate-dark">
+      <Link href={`/product/${product.slug}`} className="block">
+        <div
+          className={`relative w-full overflow-hidden rounded-2xl bg-cream-dark dark:bg-slate-dark ${featured ? 'aspect-video' : 'aspect-4/5'}`}
+        >
           {product.images[0] ? (
             <Image
               src={product.images[0].url}
@@ -47,9 +56,14 @@ export default function ProductCard({ product }: { product: Product }) {
 
       <div className="mt-4 flex items-start justify-between gap-2">
         <div>
-          <Link href={`/products/${product.slug}`}>
-            <h3 className="text-sm font-medium">{product.name}</h3>
+          <Link href={`/product/${product.slug}`}>
+            <h3 className={featured ? 'text-lg font-medium' : 'text-sm font-medium'}>
+              {product.name}
+            </h3>
           </Link>
+          {featured && product.summary && (
+            <p className="mt-1 max-w-md text-sm text-ink-light">{product.summary}</p>
+          )}
           {!isPoa && (
             <div className="mt-1 flex items-center gap-2 text-sm">
               <span className="font-medium text-slate dark:text-cream">
