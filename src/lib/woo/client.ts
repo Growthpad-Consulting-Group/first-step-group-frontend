@@ -2,7 +2,7 @@ const WOO_STORE_URL = process.env.WOO_STORE_URL;
 const WOO_CONSUMER_KEY = process.env.WOO_CONSUMER_KEY;
 const WOO_CONSUMER_SECRET = process.env.WOO_CONSUMER_SECRET;
 
-interface WooRequestOptions extends Omit<RequestInit, 'body'> {
+interface WooRequestOptions extends RequestInit {
   searchParams?: Record<string, string | number | boolean | undefined>;
 }
 
@@ -32,10 +32,11 @@ async function performRequest(path: string, options: WooRequestOptions = {}) {
   const { searchParams, ...rest } = options;
   const url = buildUrl(path, searchParams);
 
+  const isMutation = rest.method && rest.method !== 'GET';
   const res = await fetch(url.toString(), {
     ...rest,
-    // Catalog data changes when Woo admin publishes updates, not on every request.
-    next: { revalidate: 300 },
+    // Catalog reads: Woo admin updates aren't every-request-fresh. Mutations (orders) must never cache.
+    ...(isMutation ? { cache: 'no-store' as const } : { next: { revalidate: 300 } }),
   });
 
   if (!res.ok) {
