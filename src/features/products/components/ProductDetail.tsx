@@ -219,7 +219,7 @@ export default function ProductDetail({ product }: { product: Product }) {
                 </div>
 
                 <button
-                  onClick={() => addItem(product, quantity)}
+                  onClick={() => addItem(product, quantity, installation)}
                   disabled={product.stock === 0}
                   className="flex-1 rounded-md bg-gold px-8 py-3 text-sm font-medium text-ink transition-colors hover:bg-gold-light disabled:cursor-not-allowed disabled:opacity-40"
                 >
@@ -229,7 +229,7 @@ export default function ProductDetail({ product }: { product: Product }) {
 
               <button
                 onClick={() => {
-                  addItem(product, quantity);
+                  addItem(product, quantity, installation);
                   router.push('/checkout');
                 }}
                 disabled={product.stock === 0}

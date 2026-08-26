@@ -13,16 +13,19 @@ import { Product } from '@/lib/types';
 export interface LocalCartItem {
   product: Product;
   quantity: number;
+  /** Professional installation add-on selected for this line; price confirmed separately (spec §7.5.3). */
+  installation: boolean;
 }
 
 interface CartContextValue {
   items: LocalCartItem[];
-  addItem: (product: Product, quantity?: number) => void;
+  addItem: (product: Product, quantity?: number, installation?: boolean) => void;
   removeItem: (productId: string) => void;
   updateQuantity: (productId: string, quantity: number) => void;
   clearCart: () => void;
   totalItems: number;
   totalPrice: number;
+  hasInstallation: boolean;
   isOpen: boolean;
   openCart: () => void;
   closeCart: () => void;
@@ -51,20 +54,22 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
   }, [items]);
 
-  const addItem = useCallback((product: Product, quantity = 1) => {
+  const addItem = useCallback((product: Product, quantity = 1, installation = false) => {
     if (product.purchaseMode !== 'buy') {
       throw new Error(`Cannot add a POA product to the cart: ${product.slug}`);
     }
     setItems((prev) => {
-      const existing = prev.find((item) => item.product.id === product.id);
+      const existing = prev.find(
+        (item) => item.product.id === product.id && item.installation === installation,
+      );
       if (existing) {
         return prev.map((item) =>
-          item.product.id === product.id
+          item.product.id === product.id && item.installation === installation
             ? { ...item, quantity: item.quantity + quantity }
             : item,
         );
       }
-      return [...prev, { product, quantity }];
+      return [...prev, { product, quantity, installation }];
     });
     setIsOpen(true);
   }, []);
@@ -93,6 +98,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     [items],
   );
 
+  const hasInstallation = useMemo(() => items.some((item) => item.installation), [items]);
+
   const value: CartContextValue = {
     items,
     addItem,
@@ -101,6 +108,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     clearCart,
     totalItems,
     totalPrice,
+    hasInstallation,
     isOpen,
     openCart: () => setIsOpen(true),
     closeCart: () => setIsOpen(false),
