@@ -4,37 +4,40 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Icon } from '@iconify/react';
 import { motion } from 'framer-motion';
+import { getWhatsAppUrl } from '@/lib/whatsapp';
 
-const STEPS = [
-  {
-    number: '01',
-    title: 'Explore in person',
-    description: 'See proportions, operation and finishes in real conditions.',
-  },
-  {
-    number: '02',
-    title: 'Compare materials',
-    description: 'Review complementary surfaces, colours and details together.',
-  },
-  {
-    number: '03',
-    title: 'Specify with guidance',
-    description: 'Build a considered selection around your project requirements.',
-  },
-];
+interface Step {
+  number: string;
+  title: string;
+  description: string;
+}
 
-export default function GuidedSelection() {
+interface GuidedSelectionSectionProps {
+  eyebrow: string;
+  heading: string;
+  description: string;
+  steps: Step[];
+  image: string;
+  imageAlt: string;
+  primaryLabel: string;
+  primaryHref: string;
+}
+
+export default function GuidedSelectionSection({
+  eyebrow,
+  heading,
+  description,
+  steps,
+  image,
+  imageAlt,
+  primaryLabel,
+  primaryHref,
+}: GuidedSelectionSectionProps) {
   return (
     <section className="bg-cream">
       <div className="grid grid-cols-1 lg:grid-cols-2">
-        <div className="relative aspect-4/3 lg:aspect-auto lg:min-h-[600px]">
-          <Image
-            src="/images/difference-lifestyle.jpg"
-            alt="First Step showroom material library"
-            fill
-            className="object-cover"
-            sizes="(min-width: 1024px) 50vw, 100vw"
-          />
+        <div className="relative aspect-4/3 lg:aspect-auto lg:min-h-150">
+          <Image src={image} alt={imageAlt} fill className="object-cover" sizes="(min-width: 1024px) 50vw, 100vw" />
         </div>
 
         <motion.div
@@ -46,20 +49,18 @@ export default function GuidedSelection() {
         >
           <div>
             <h4 className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-dark">
-              Guided From The First Step
+              {eyebrow}
             </h4>
             <h3 className="font-display mt-3 text-2xl font-light uppercase tracking-tight text-ink sm:text-3xl">
-              Bring every collection together with confidence.
+              {heading}
             </h3>
             <p className="mt-4 max-w-lg text-base leading-relaxed text-ink-light">
-              Our showroom team helps you compare finishes, understand
-              technical requirements and assemble complementary products
-              across brands and rooms.
+              {description}
             </p>
           </div>
 
           <div className="flex flex-col divide-y divide-ink/10 border-t border-ink/10">
-            {STEPS.map((step) => (
+            {steps.map((step) => (
               <div key={step.number} className="flex items-start gap-6 py-5">
                 <span className="text-xs font-semibold uppercase tracking-widest text-gold-dark">
                   {step.number}
@@ -78,13 +79,13 @@ export default function GuidedSelection() {
 
           <div className="flex flex-col gap-3 sm:flex-row">
             <Link
-              href="/showroom"
+              href={primaryHref}
               className="inline-flex items-center justify-center gap-2 rounded-xs bg-gold px-8 py-4 text-xs font-semibold uppercase tracking-widest text-ink transition-colors hover:bg-gold-light"
             >
-              Visit Showroom
+              {primaryLabel}
             </Link>
             <Link
-              href="https://wa.me/26378230418"
+              href={getWhatsAppUrl()}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 rounded-xs bg-slate px-8 py-4 text-xs font-semibold uppercase tracking-widest text-cream transition-colors hover:bg-slate-light"

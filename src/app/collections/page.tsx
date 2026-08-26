@@ -3,7 +3,7 @@ import { DEPARTMENTS } from '@/data/departments';
 import { SITE_URL } from '@/lib/site';
 import CollectionsHero from '@/features/collections/components/CollectionsHero';
 import DepartmentSection from '@/features/collections/components/DepartmentSection';
-import GuidedSelection from '@/features/collections/components/GuidedSelection';
+import GuidedSelectionSection from '@/shared/ui/GuidedSelectionSection';
 
 export const metadata: Metadata = {
   title: 'All Collections',
@@ -40,7 +40,32 @@ export default function CollectionsPage() {
         cardVariant="split"
       />
 
-      <GuidedSelection />
+      <GuidedSelectionSection
+        eyebrow="Guided From The First Step"
+        heading="Bring every collection together with confidence."
+        description="Our showroom team helps you compare finishes, understand technical requirements and assemble complementary products across brands and rooms."
+        steps={[
+          {
+            number: '01',
+            title: 'Explore in person',
+            description: 'See proportions, operation and finishes in real conditions.',
+          },
+          {
+            number: '02',
+            title: 'Compare materials',
+            description: 'Review complementary surfaces, colours and details together.',
+          },
+          {
+            number: '03',
+            title: 'Specify with guidance',
+            description: 'Build a considered selection around your project requirements.',
+          },
+        ]}
+        image="/images/difference-lifestyle.jpg"
+        imageAlt="First Step showroom material library"
+        primaryLabel="Visit Showroom"
+        primaryHref="/showroom"
+      />
     </div>
   );
 }

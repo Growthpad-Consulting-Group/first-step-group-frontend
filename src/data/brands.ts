@@ -1,3 +1,8 @@
+export interface BrandFeature {
+  title: string;
+  description: string;
+}
+
 export interface Brand {
   slug: string;
   name: string;
@@ -6,6 +11,11 @@ export interface Brand {
   /** Victoria + Albert and Kohler get the larger "Signature Brand Houses" treatment (frame 08). */
   signature?: boolean;
   image: string;
+  /** Longer editorial heading + numbered features for the brand story section (frame 04/05).
+   *  Only populated where real per-brand copy exists in Figma — not fabricated for the rest. */
+  storyHeading?: string;
+  storyDescription?: string;
+  features?: BrandFeature[];
 }
 
 /**
@@ -24,6 +34,23 @@ export const BRANDS: Brand[] = [
       'Sculptural freestanding baths and basins, hand-finished in England with architectural lightness and enduring presence.',
     signature: true,
     image: '/images/bathroom.jpg',
+    storyHeading: 'Sculpted from stone. Built to last.',
+    storyDescription:
+      'Victoria + Albert creates sculptural baths and basins from QUARRYCAST®, a proprietary volcanic limestone composite, then hand-finishes every piece in England.',
+    features: [
+      {
+        title: 'QUARRYCAST® Material',
+        description: 'Volcanic limestone composite with strength and natural warmth.',
+      },
+      {
+        title: '35+ Colours',
+        description: 'A considered palette with custom RAL finishes available.',
+      },
+      {
+        title: 'Hand-Finished in England',
+        description: 'Modern and Victorian forms refined by skilled hands.',
+      },
+    ],
   },
   {
     slug: 'kohler',
