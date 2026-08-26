@@ -42,8 +42,8 @@ export default function CookieConsent() {
           aria-live="polite"
           aria-label="Cookie consent"
         >
-          <div className="mx-auto flex max-w-7xl flex-col items-start gap-4 px-6 py-6 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-sm text-zinc-300">
+          <div className="container-fluid flex flex-col items-start gap-4 py-6 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-sm text-cream">
               We use cookies to improve your experience and understand how you use
               our site. Read our{' '}
               <Link href="/privacy" className="text-gold-light underline underline-offset-2">

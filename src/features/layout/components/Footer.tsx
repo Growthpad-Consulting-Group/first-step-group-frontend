@@ -25,7 +25,7 @@ const CONTACT_DETAILS = [
 export default function Footer() {
   return (
     <footer className="bg-ink">
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="container-fluid">
         <div className="flex flex-col gap-8 border-b border-white/10 py-16 sm:flex-row sm:items-end sm:justify-between">
           <div className="text-left">
             <h4 className="text-[10px] font-medium uppercase tracking-[0.2em] text-gold-light">
@@ -47,7 +47,7 @@ export default function Footer() {
               href="https://wa.me/27769730167"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center rounded-md bg-white px-8 py-4 text-xs font-semibold uppercase tracking-widest text-ink transition-colors hover:bg-zinc-100"
+              className="inline-flex items-center rounded-md bg-white px-8 py-4 text-xs font-semibold uppercase tracking-widest text-ink transition-colors hover:bg-cream-dark"
             >
               WhatsApp Us
             </Link>
@@ -63,7 +63,7 @@ export default function Footer() {
               height={64}
               className="h-28 w-auto"
             />
-            <p className="mt-4 max-w-xs text-sm text-zinc-400">
+            <p className="mt-4 max-w-xs text-sm text-ink-light">
               Premium home finishing — sourced globally, delivered across Zimbabwe.
             </p>
           </div>
@@ -77,7 +77,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-zinc-400 transition-colors hover:text-white"
+                    className="text-sm text-ink-light transition-colors hover:text-white"
                   >
                     {link.label}
                   </Link>
@@ -95,7 +95,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-zinc-400 transition-colors hover:text-white"
+                    className="text-sm text-ink-light transition-colors hover:text-white"
                   >
                     {link.label}
                   </Link>
@@ -110,7 +110,7 @@ export default function Footer() {
             </h5>
             <ul className="mt-4 flex flex-col gap-3">
               {CONTACT_DETAILS.map((detail) => (
-                <li key={detail} className="text-sm text-zinc-400">
+                <li key={detail} className="text-sm text-ink-light">
                   {detail}
                 </li>
               ))}
@@ -119,7 +119,7 @@ export default function Footer() {
         </div>
 
         <div className="py-8">
-          <p className="text-sm text-zinc-500">
+          <p className="text-sm text-ink-light">
             © {new Date().getFullYear()} First Step Group — Harare, Zimbabwe.
           </p>
         </div>

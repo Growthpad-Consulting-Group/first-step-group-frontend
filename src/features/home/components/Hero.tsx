@@ -19,7 +19,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-r from-ink/95 via-ink/70 to-ink/40" />
       <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-transparent to-ink/60" />
 
-      <div className="relative mx-auto flex w-full max-w-7xl flex-col items-start px-6 pb-20 sm:pb-28">
+      <div className="container-fluid relative flex flex-col items-start pb-20 sm:pb-28">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -33,7 +33,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-6 max-w-lg text-lg text-zinc-200"
+          className="mt-6 max-w-lg text-lg text-cream"
         >
           Premium bathroom, kitchen, HVAC and home tech fixtures sourced from the
           world&apos;s finest brands and delivered anywhere in Zimbabwe.
@@ -53,7 +53,7 @@ export default function Hero() {
           </Link>
           <Link
             href="/showroom"
-            className="inline-flex items-center rounded-md bg-white px-8 py-4 text-xs font-semibold uppercase tracking-widest text-ink transition-colors hover:bg-zinc-100"
+            className="inline-flex items-center rounded-md bg-white px-8 py-4 text-xs font-semibold uppercase tracking-widest text-ink transition-colors hover:bg-cream-dark"
           >
             Visit Showroom
           </Link>

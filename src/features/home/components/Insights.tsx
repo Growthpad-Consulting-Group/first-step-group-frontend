@@ -40,7 +40,7 @@ const ARTICLES: Article[] = [
 export default function Insights() {
   return (
     <section className="bg-slate py-20 sm:py-28">
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="container-fluid">
         <div className="mb-14 flex items-end justify-between gap-6">
           <div className="text-left">
             <h4 className="text-[10px] font-medium uppercase tracking-[0.2em] text-gold-light">

@@ -42,7 +42,7 @@ export default function Difference() {
         />
       </motion.div>
 
-      <div className="relative mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-2 lg:gap-16">
+      <div className="container-fluid relative grid grid-cols-1 lg:grid-cols-2 lg:gap-16">
         <div className="hidden lg:block" />
 
         <motion.div
@@ -58,7 +58,7 @@ export default function Difference() {
           <h3 className="font-display mt-3 text-2xl font-semibold tracking-tight text-ink dark:text-white sm:text-3xl">
             The world&apos;s finest brands, at your doorstep.
           </h3>
-          <p className="mt-4 text-base leading-relaxed text-slate dark:text-zinc-400">
+          <p className="mt-4 text-base leading-relaxed text-slate dark:text-cream-dark">
             We bring globally acclaimed home finishing brands directly to Zimbabwe
             with personal guidance at our Borrowdale showroom and nationwide
             delivery included.
@@ -73,7 +73,7 @@ export default function Difference() {
                 />
                 <div>
                   <p className="font-bold text-ink dark:text-white">{feature.title}</p>
-                  <p className="mt-1 text-sm text-slate dark:text-zinc-400">
+                  <p className="mt-1 text-sm text-slate dark:text-cream-dark">
                     {feature.description}
                   </p>
                 </div>
@@ -90,7 +90,7 @@ export default function Difference() {
             </Link>
             <Link
               href="/showroom"
-              className="inline-flex items-center rounded-md border border-black/10 bg-white px-8 py-4 text-xs font-semibold uppercase tracking-widest text-ink transition-colors hover:bg-zinc-100 dark:border-white/20 dark:bg-transparent dark:text-white dark:hover:bg-white/5"
+              className="inline-flex items-center rounded-md border border-black/10 bg-white px-8 py-4 text-xs font-semibold uppercase tracking-widest text-ink transition-colors hover:bg-cream-dark dark:border-white/20 dark:bg-transparent dark:text-white dark:hover:bg-white/5"
             >
               Visit Showroom
             </Link>

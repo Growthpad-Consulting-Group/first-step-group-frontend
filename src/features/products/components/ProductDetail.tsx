@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Product } from '@/lib/types';
-import { useCart } from '@/context/cart-context';
+import { useCart } from '@/features/cart/context/cart-context';
 
 const formatPrice = (value: number) =>
   new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
@@ -15,9 +15,9 @@ export default function ProductDetail({ product }: { product: Product }) {
   const [quantity, setQuantity] = useState(1);
 
   return (
-    <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 py-16 lg:grid-cols-2">
+    <div className="container-fluid grid grid-cols-1 gap-12 py-16 lg:grid-cols-2">
       <div className="flex flex-col gap-4">
-        <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-900">
+        <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl bg-cream-dark dark:bg-slate-dark">
           {product.images[activeImage] ? (
             <Image
               src={product.images[activeImage]}
@@ -27,7 +27,7 @@ export default function ProductDetail({ product }: { product: Product }) {
               priority
             />
           ) : (
-            <div className="flex h-full items-center justify-center text-sm text-zinc-400">
+            <div className="flex h-full items-center justify-center text-sm text-ink-light">
               No image
             </div>
           )}
@@ -59,18 +59,18 @@ export default function ProductDetail({ product }: { product: Product }) {
         <h1 className="font-display text-3xl font-semibold tracking-tight">{product.name}</h1>
 
         <div className="mt-4 flex items-center gap-3 text-xl">
-          <span className="font-medium text-slate dark:text-zinc-300">
+          <span className="font-medium text-slate dark:text-cream">
             {formatPrice(product.price)}
           </span>
           {product.compareAtPrice && (
-            <span className="text-zinc-400 line-through">
+            <span className="text-ink-light line-through">
               {formatPrice(product.compareAtPrice)}
             </span>
           )}
         </div>
 
         {product.description && (
-          <p className="mt-6 leading-relaxed text-zinc-600 dark:text-zinc-400">
+          <p className="mt-6 leading-relaxed text-ink-light dark:text-cream-dark">
             {product.description}
           </p>
         )}
@@ -101,7 +101,7 @@ export default function ProductDetail({ product }: { product: Product }) {
           </button>
         </div>
 
-        <p className="mt-4 text-xs text-zinc-500">
+        <p className="mt-4 text-xs text-ink-light">
           {product.stock > 0 ? `${product.stock} in stock` : 'Currently unavailable'}
         </p>
       </motion.div>

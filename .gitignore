@@ -43,3 +43,5 @@ next-env.d.ts
 # agent instruction files
 AGENTS.md
 CLAUDE.md
+
+.history

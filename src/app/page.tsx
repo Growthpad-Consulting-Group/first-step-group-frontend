@@ -1,12 +1,12 @@
 import Link from 'next/link';
 import { getProducts } from '@/lib/products';
-import ProductCard from '@/components/ProductCard';
-import Hero from '@/components/Hero';
-import Collections from '@/components/Collections';
-import Difference from '@/components/Difference';
-import Brands from '@/components/Brands';
-import Showroom from '@/components/Showroom';
-import Insights from '@/components/Insights';
+import ProductCard from '@/features/products/components/ProductCard';
+import Hero from '@/features/home/components/Hero';
+import Collections from '@/features/home/components/Collections';
+import Difference from '@/features/home/components/Difference';
+import Brands from '@/features/home/components/Brands';
+import Showroom from '@/features/home/components/Showroom';
+import Insights from '@/features/home/components/Insights';
 
 export default async function Home() {
   const featured = await getProducts({ limit: 8, sort: 'newest' }).catch(() => null);
@@ -20,16 +20,16 @@ export default async function Home() {
       <Showroom />
       <Insights />
 
-      <section className="mx-auto w-full max-w-7xl px-6 py-20">
+      <section className="container-fluid py-20">
         <div className="mb-10 flex items-end justify-between">
           <h2 className="font-display text-2xl font-semibold tracking-tight">New Arrivals</h2>
-          <Link href="/products" className="text-sm font-medium text-slate hover:text-gold dark:text-zinc-400 dark:hover:text-gold-light">
+          <Link href="/products" className="text-sm font-medium text-slate hover:text-gold dark:text-cream-dark dark:hover:text-gold-light">
             View all →
           </Link>
         </div>
 
         {!featured || featured.items.length === 0 ? (
-          <p className="rounded-2xl border border-dashed border-black/10 p-12 text-center text-sm text-zinc-500 dark:border-white/10">
+          <p className="rounded-2xl border border-dashed border-black/10 p-12 text-center text-sm text-ink-light dark:border-white/10">
             No products yet.
           </p>
         ) : (

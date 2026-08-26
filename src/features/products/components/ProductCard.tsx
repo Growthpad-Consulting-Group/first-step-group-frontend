@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Product } from '@/lib/types';
-import { useCart } from '@/context/cart-context';
+import { useCart } from '@/features/cart/context/cart-context';
 
 const formatPrice = (value: number) =>
   new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
@@ -21,7 +21,7 @@ export default function ProductCard({ product }: { product: Product }) {
       className="group flex flex-col"
     >
       <Link href={`/products/${product.slug}`} className="block">
-        <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-900">
+        <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl bg-cream-dark dark:bg-slate-dark">
           {product.images[0] ? (
             <Image
               src={product.images[0]}
@@ -31,7 +31,7 @@ export default function ProductCard({ product }: { product: Product }) {
               sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
             />
           ) : (
-            <div className="flex h-full items-center justify-center text-sm text-zinc-400">
+            <div className="flex h-full items-center justify-center text-sm text-ink-light">
               No image
             </div>
           )}
@@ -44,11 +44,11 @@ export default function ProductCard({ product }: { product: Product }) {
             <h3 className="text-sm font-medium">{product.name}</h3>
           </Link>
           <div className="mt-1 flex items-center gap-2 text-sm">
-            <span className="font-medium text-slate dark:text-zinc-300">
+            <span className="font-medium text-slate dark:text-cream">
               {formatPrice(product.price)}
             </span>
             {product.compareAtPrice && (
-              <span className="text-zinc-400 line-through">
+              <span className="text-ink-light line-through">
                 {formatPrice(product.compareAtPrice)}
               </span>
             )}

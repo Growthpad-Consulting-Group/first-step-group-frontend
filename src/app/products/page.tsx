@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { getProducts } from '@/lib/products';
-import ProductCard from '@/components/ProductCard';
+import ProductCard from '@/features/products/components/ProductCard';
 import { SITE_URL } from '@/lib/site';
 
 type SortOption = 'price_asc' | 'price_desc' | 'newest';
@@ -31,11 +31,11 @@ export default async function ProductsPage({
   }).catch(() => null);
 
   return (
-    <div className="mx-auto max-w-7xl px-6 py-16">
+    <div className="container-fluid py-16">
       <h1 className="font-display mb-10 text-3xl font-semibold tracking-tight">Shop</h1>
 
       {!result || result.items.length === 0 ? (
-        <p className="rounded-2xl border border-dashed border-black/10 p-12 text-center text-sm text-zinc-500 dark:border-white/10">
+        <p className="rounded-2xl border border-dashed border-black/10 p-12 text-center text-sm text-ink-light dark:border-white/10">
           No products found.
         </p>
       ) : (

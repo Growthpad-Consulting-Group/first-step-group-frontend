@@ -2,8 +2,8 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Minus, Plus, Trash2 } from 'lucide-react';
-import { useCart } from '@/context/cart-context';
+import { Icon } from '@iconify/react';
+import { useCart } from '@/features/cart/context/cart-context';
 
 const formatPrice = (value: number) =>
   new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
@@ -13,7 +13,7 @@ export default function CartPage() {
 
   if (items.length === 0) {
     return (
-      <div className="mx-auto max-w-7xl px-6 py-24 text-center">
+      <div className="container-fluid py-24 text-center">
         <h1 className="font-display text-2xl font-semibold">Your cart is empty</h1>
         <Link
           href="/products"
@@ -32,7 +32,7 @@ export default function CartPage() {
       <ul className="flex flex-col divide-y divide-black/5 dark:divide-white/10">
         {items.map((item) => (
           <li key={item.product._id} className="flex items-center gap-6 py-6">
-            <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-900">
+            <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-xl bg-cream-dark dark:bg-slate-dark">
               {item.product.images[0] && (
                 <Image
                   src={item.product.images[0]}
@@ -45,7 +45,7 @@ export default function CartPage() {
 
             <div className="flex-1">
               <p className="font-medium">{item.product.name}</p>
-              <p className="mt-1 text-sm text-slate dark:text-zinc-400">
+              <p className="mt-1 text-sm text-slate dark:text-cream-dark">
                 {formatPrice(item.product.price)}
               </p>
             </div>
@@ -55,14 +55,14 @@ export default function CartPage() {
                 onClick={() => updateQuantity(item.product._id, Math.max(1, item.quantity - 1))}
                 aria-label="Decrease quantity"
               >
-                <Minus className="h-3 w-3" />
+                <Icon icon="solar:minus-circle-linear" className="h-3 w-3" />
               </button>
               <span className="min-w-[1ch] text-center text-sm">{item.quantity}</span>
               <button
                 onClick={() => updateQuantity(item.product._id, item.quantity + 1)}
                 aria-label="Increase quantity"
               >
-                <Plus className="h-3 w-3" />
+                <Icon icon="solar:add-circle-linear" className="h-3 w-3" />
               </button>
             </div>
 
@@ -72,10 +72,10 @@ export default function CartPage() {
 
             <button
               onClick={() => removeItem(item.product._id)}
-              className="text-zinc-400 hover:text-red-500"
+              className="text-ink-light hover:text-red-500"
               aria-label="Remove item"
             >
-              <Trash2 className="h-4 w-4" />
+              <Icon icon="solar:trash-bin-trash-linear" className="h-4 w-4" />
             </button>
           </li>
         ))}
@@ -84,7 +84,7 @@ export default function CartPage() {
       <div className="mt-10 flex flex-col items-end gap-4 border-t border-black/5 pt-8 dark:border-white/10">
         <div className="flex w-full max-w-xs items-center justify-between text-lg font-medium">
           <span>Subtotal</span>
-          <span className="text-slate dark:text-zinc-300">{formatPrice(totalPrice)}</span>
+          <span className="text-slate dark:text-cream">{formatPrice(totalPrice)}</span>
         </div>
         <Link
           href="/checkout"

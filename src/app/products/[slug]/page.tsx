@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getProductBySlug } from '@/lib/products';
-import ProductDetail from '@/components/ProductDetail';
-import JsonLd from '@/components/JsonLd';
+import ProductDetail from '@/features/products/components/ProductDetail';
+import JsonLd from '@/features/layout/components/JsonLd';
 import { SITE_NAME, SITE_URL } from '@/lib/site';
 import { Category } from '@/lib/types';
 

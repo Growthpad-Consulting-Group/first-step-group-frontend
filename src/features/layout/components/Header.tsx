@@ -2,77 +2,78 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Menu, X } from 'lucide-react';
+import { Icon } from '@iconify/react';
 import { useState } from 'react';
-import { usePathname } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
-
-const NAV_LINKS = [
-  { href: '/collections', label: 'Collections' },
-  { href: '/brands', label: 'Brands' },
-  { href: '/showroom', label: 'Showroom' },
-  { href: '/journal', label: 'Journal' },
-];
+import {
+  AnimatePresence,
+  motion,
+  useMotionValueEvent,
+  useScroll,
+} from 'framer-motion';
+import { NAV_LINKS } from '@/data/nav';
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const pathname = usePathname();
-  const overlayOnHero = pathname === '/';
+  const [hidden, setHidden] = useState(false);
+  const { scrollY } = useScroll();
+
+  useMotionValueEvent(scrollY, 'change', (latest) => {
+    const previous = scrollY.getPrevious() ?? 0;
+    setHidden(latest > previous && latest > 96);
+  });
 
   return (
-    <header
-      className={
-        overlayOnHero
-          ? 'absolute inset-x-0 top-0 z-40'
-          : 'sticky top-0 z-40 border-b border-black/5 bg-white/90 backdrop-blur dark:border-white/10 dark:bg-ink/90'
-      }
+    <motion.header
+      animate={{ y: hidden ? '-100%' : '0%' }}
+      transition={{ duration: 0.3, ease: 'easeInOut' }}
+      className="sticky top-0 z-40 bg-slate"
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+      <div className="container-fluid grid grid-cols-2 items-center py-3 sm:grid-cols-[1fr_auto_1fr]">
         <Link href="/" className="flex items-center">
           <Image
-            src="/logo.webp"
+            src="/logo.svg"
             alt="First Step — Premium Building"
             width={160}
             height={64}
             priority
-            className="h-30 w-auto"
+            className="h-20 w-auto"
           />
         </Link>
 
-        <nav className="hidden gap-10 text-sm font-medium tracking-widest sm:flex">
+        <nav className="col-start-2 hidden items-center gap-8 text-sm font-medium tracking-widest sm:flex">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className={
-                overlayOnHero
-                  ? 'uppercase text-white transition-colors hover:text-gold-light'
-                  : 'uppercase text-ink transition-colors hover:text-gold dark:text-white dark:hover:text-gold-light'
-              }
+              className="flex items-center gap-1 uppercase text-white transition-colors hover:text-gold-light"
             >
               {link.label}
+              {link.hasDropdown && (
+                <Icon icon="solar:alt-arrow-down-linear" className="h-4 w-4" />
+              )}
             </Link>
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center justify-end gap-3">
           <Link
             href="/enquire"
-            className="hidden rounded-md bg-gold px-7 py-3.5 text-sm font-semibold uppercase tracking-widest text-ink transition-colors hover:bg-gold-light sm:inline-flex sm:items-center"
+            className="hidden items-center gap-2 rounded-xs bg-gold px-7 py-3.5 text-sm font-semibold uppercase tracking-widest text-ink transition-colors hover:bg-gold-light sm:inline-flex"
           >
-            Enquire Now
+            Inquire Now
+            <Icon icon="solar:arrow-right-linear" className="h-4 w-4" />
           </Link>
 
           <button
             onClick={() => setMobileOpen((v) => !v)}
-            className={
-              overlayOnHero
-                ? 'flex h-12 w-12 items-center justify-center rounded-full text-white transition-colors hover:bg-white/10 sm:hidden'
-                : 'flex h-12 w-12 items-center justify-center rounded-full text-ink transition-colors hover:bg-gold/10 dark:text-white dark:hover:bg-white/10 sm:hidden'
-            }
+            className="flex h-12 w-12 items-center justify-center rounded-full text-white transition-colors hover:bg-white/10 sm:hidden"
             aria-label="Toggle menu"
           >
-            {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {mobileOpen ? (
+              <Icon icon="solar:close-circle-linear" className="h-6 w-6" />
+            ) : (
+              <Icon icon="solar:hamburger-menu-linear" className="h-6 w-6" />
+            )}
           </button>
         </div>
       </div>
@@ -96,7 +97,7 @@ export default function Header() {
             >
               <div className="flex items-center justify-between border-b border-black/5 px-6 py-5 dark:border-white/10">
                 <Image
-                  src="/logo.webp"
+                  src="/logo.svg"
                   alt="First Step — Premium Building"
                   width={160}
                   height={64}
@@ -107,7 +108,7 @@ export default function Header() {
                   className="flex h-9 w-9 items-center justify-center rounded-full text-ink hover:bg-black/5 dark:text-white dark:hover:bg-white/10"
                   aria-label="Close menu"
                 >
-                  <X className="h-5 w-5" />
+                  <Icon icon="solar:close-circle-linear" className="h-5 w-5" />
                 </button>
               </div>
 
@@ -127,13 +128,13 @@ export default function Header() {
                   onClick={() => setMobileOpen(false)}
                   className="mt-3 inline-flex items-center justify-center rounded-md bg-gold px-7 py-3.5 text-sm font-semibold uppercase tracking-widest text-ink transition-colors hover:bg-gold-light"
                 >
-                  Enquire Now
+                  Inquire Now
                 </Link>
               </div>
             </motion.nav>
           </>
         )}
       </AnimatePresence>
-    </header>
+    </motion.header>
   );
 }

@@ -30,7 +30,7 @@ const DETAILS = [
 export default function Showroom() {
   return (
     <section className="bg-cream">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-6 lg:grid-cols-2 lg:gap-16">
+      <div className="container-fluid grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -76,7 +76,7 @@ export default function Showroom() {
               href="https://wa.me/27769730167"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-md border border-black/10 bg-white px-8 py-4 text-xs font-semibold uppercase tracking-widest text-ink transition-colors hover:bg-zinc-100"
+              className="inline-flex items-center justify-center rounded-md border border-black/10 bg-white px-8 py-4 text-xs font-semibold uppercase tracking-widest text-ink transition-colors hover:bg-cream-dark"
             >
               WhatsApp Us
             </Link>

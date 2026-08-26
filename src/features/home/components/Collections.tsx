@@ -54,7 +54,7 @@ function CollectionCta({ label, variant }: { label: string; variant: 'gold' | 'w
       className={
         variant === 'gold'
           ? `${base} bg-gold text-ink hover:bg-gold-light`
-          : `${base} bg-white text-ink hover:bg-zinc-100`
+          : `${base} bg-white text-ink hover:bg-cream-dark`
       }
     >
       {label}
@@ -67,7 +67,7 @@ export default function Collections() {
 
   return (
     <section className="bg-cream py-20 dark:bg-ink sm:py-28">
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="container-fluid">
         <div className="mb-14 text-left">
           <h4 className="text-[10px] font-medium uppercase tracking-[0.2em] text-gold-dark dark:text-gold-light">
             Our Collections
@@ -107,7 +107,7 @@ export default function Collections() {
                   {featured.title}
                 </h3>
                 {featured.brands && (
-                  <p className="text-sm text-zinc-300">{featured.brands}</p>
+                  <p className="text-sm text-cream">{featured.brands}</p>
                 )}
                 <div className="mt-2">
                   <CollectionCta label={featured.cta} variant={featured.ctaVariant} />

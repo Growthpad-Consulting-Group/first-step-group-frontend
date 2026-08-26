@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useCart } from '@/context/cart-context';
+import { useCart } from '@/features/cart/context/cart-context';
 
 const formatPrice = (value: number) =>
   new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
@@ -11,7 +11,7 @@ export default function CheckoutPage() {
 
   if (items.length === 0) {
     return (
-      <div className="mx-auto max-w-7xl px-6 py-24 text-center">
+      <div className="container-fluid py-24 text-center">
         <h1 className="font-display text-2xl font-semibold">Nothing to check out</h1>
         <Link
           href="/products"
@@ -72,7 +72,7 @@ export default function CheckoutPage() {
           >
             Place order
           </button>
-          <p className="text-xs text-zinc-500">
+          <p className="text-xs text-ink-light">
             Checkout submission wires up to the backend&apos;s /orders endpoint once auth is connected.
           </p>
         </form>
@@ -92,7 +92,7 @@ export default function CheckoutPage() {
         </ul>
         <div className="mt-6 flex items-center justify-between border-t border-black/5 pt-6 text-lg font-medium dark:border-white/10">
           <span>Total</span>
-          <span className="text-slate dark:text-zinc-300">{formatPrice(totalPrice)}</span>
+          <span className="text-slate dark:text-cream">{formatPrice(totalPrice)}</span>
         </div>
       </div>
     </div>

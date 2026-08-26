@@ -50,7 +50,7 @@ function BrandCard({ brand, index }: { brand: Brand; index: number }) {
 export default function Brands() {
   return (
     <section className="bg-slate py-14 sm:py-28">
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="container-fluid">
         <div className="mb-10 text-left sm:mb-14">
           <h4 className="text-[10px] font-medium uppercase tracking-[0.2em] text-gold-light">
             Our Brands

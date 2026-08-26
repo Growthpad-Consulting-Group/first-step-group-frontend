@@ -1,12 +1,12 @@
 import type { Metadata, Viewport } from 'next';
 import { Cinzel, Poppins } from 'next/font/google';
 import './globals.css';
-import { CartProvider } from '@/context/cart-context';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import CartDrawer from '@/components/CartDrawer';
-import CookieConsent from '@/components/CookieConsent';
-import JsonLd from '@/components/JsonLd';
+import { CartProvider } from '@/features/cart/context/cart-context';
+import Header from '@/features/layout/components/Header';
+import Footer from '@/features/layout/components/Footer';
+import CartDrawer from '@/features/cart/components/CartDrawer';
+import CookieConsent from '@/features/layout/components/CookieConsent';
+import JsonLd from '@/features/layout/components/JsonLd';
 import {
   SITE_DESCRIPTION,
   SITE_KEYWORDS,
@@ -65,9 +65,16 @@ export const metadata: Metadata = {
     images: ['/hero-bg.webp'],
   },
   icons: {
-    icon: '/favicon.ico',
-    apple: '/logo.webp',
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/icon-512.png', sizes: '512x512', type: 'image/png' },
+    ],
+    apple: '/apple-touch-icon.png',
   },
+  manifest: '/site.webmanifest',
   robots: {
     index: true,
     follow: true,
@@ -76,8 +83,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#f5f2ee' },
-    { media: '(prefers-color-scheme: dark)', color: '#1e1e1e' },
+    { media: '(prefers-color-scheme: light)', color: '#ede8e1' },
+    { media: '(prefers-color-scheme: dark)', color: '#111111' },
   ],
 };
 
@@ -116,7 +123,6 @@ export default function RootLayout({
           <Footer />
           <CartDrawer />
         </CartProvider>
-        <CookieConsent />
       </body>
     </html>
   );
