@@ -14,7 +14,7 @@ interface Article {
 
 const ARTICLES: Article[] = [
   {
-    image: '/bathroom.webp',
+    image: '/images/bathroom.webp',
     caption: 'Design Trends',
     excerpt:
       'Five bathroom finishes every luxury home in Zimbabwe should consider this year',
@@ -22,14 +22,14 @@ const ARTICLES: Article[] = [
     href: '/journal/bathroom-finishes',
   },
   {
-    image: '/showroom.webp',
+    image: '/images/showroom.webp',
     caption: 'Podcast',
     excerpt: 'Luxury living in Zimbabwe — what it means, and where it’s going',
     tag: 'Episode 1',
     href: '/journal/luxury-living-zimbabwe',
   },
   {
-    image: '/kitchen.webp',
+    image: '/images/kitchen.webp',
     caption: 'Project Spotlight',
     excerpt: 'Inside a Borrowdale kitchen transformation using Franke & Dado Quartz',
     tag: 'Kitchen & Surfaces',

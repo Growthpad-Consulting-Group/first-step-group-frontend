@@ -92,7 +92,7 @@ export default function Showroom() {
         >
           <div className="relative aspect-[4/3] w-full overflow-hidden lg:aspect-auto lg:min-h-0 lg:flex-1">
             <Image
-              src="/showroom.webp"
+              src="/images/showroom.webp"
               alt="Inside the First Step showroom"
               fill
               className="object-cover"

@@ -9,18 +9,18 @@ interface Brand {
 }
 
 const ROW_ONE: Brand[] = [
-  { name: 'Victoria + Albert', src: '/victoria-albert.webp' },
-  { name: 'Grohe', src: '/GROHE.webp' },
-  { name: 'Kohler', src: '/kohler.webp' },
-  { name: 'Hansgrohe', src: '/hansgrohe.webp' },
-  { name: 'SMEG', src: '/smeg.webp' },
+  { name: 'Victoria + Albert', src: '/brands/victoria-albert.webp' },
+  { name: 'Grohe', src: '/brands/GROHE.webp' },
+  { name: 'Kohler', src: '/brands/kohler.webp' },
+  { name: 'Hansgrohe', src: '/brands/hansgrohe.webp' },
+  { name: 'SMEG', src: '/brands/smeg.webp' },
 ];
 
 const ROW_TWO: Brand[] = [
-  { name: 'Cosentino', src: '/cosentino.webp' },
-  { name: 'Dado Quartz', src: '/dadoquartz.webp' },
-  { name: 'Franke', src: '/franke.webp' },
-  { name: 'Meir', src: '/meir.webp' },
+  { name: 'Cosentino', src: '/brands/cosentino.webp' },
+  { name: 'Dado Quartz', src: '/brands/dadoquartz.webp' },
+  { name: 'Franke', src: '/brands/franke.webp' },
+  { name: 'Meir', src: '/brands/meir.webp' },
 ];
 
 const ALL_BRANDS = [...ROW_ONE, ...ROW_TWO];
