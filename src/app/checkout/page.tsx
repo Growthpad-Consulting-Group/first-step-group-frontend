@@ -82,11 +82,11 @@ export default function CheckoutPage() {
         <h2 className="font-display mb-6 text-lg font-light">Order summary</h2>
         <ul className="flex flex-col divide-y divide-black/5 dark:divide-white/10">
           {items.map((item) => (
-            <li key={item.product._id} className="flex items-center justify-between py-4 text-sm">
+            <li key={item.product.id} className="flex items-center justify-between py-4 text-sm">
               <span>
                 {item.product.name} × {item.quantity}
               </span>
-              <span>{formatPrice(item.product.price * item.quantity)}</span>
+              <span>{formatPrice((item.product.price ?? 0) * item.quantity)}</span>
             </li>
           ))}
         </ul>

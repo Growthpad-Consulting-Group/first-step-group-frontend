@@ -1,25 +1,53 @@
+export type PurchaseMode = 'buy' | 'poa';
+
 export interface Category {
-  _id: string;
+  id: string;
   name: string;
   slug: string;
   description?: string;
   image?: string;
+  parentId?: string;
+}
+
+export interface ProductImage {
+  url: string;
+  alt?: string;
+}
+
+export interface ProductSpec {
+  label: string;
+  value: string;
 }
 
 export interface Product {
-  _id: string;
-  name: string;
+  id: string;
   slug: string;
+  name: string;
+  /** One of First Step's 9 carried brands, when set on the product in Woo. */
+  brand?: string;
+  /** One of the 4 storefront departments (Bathroom & Wet Rooms, Kitchen & Surfaces, Climate Control, Home Technology). */
+  department?: string;
+  category: string;
+  reference?: string;
+  summary?: string;
   description?: string;
-  price: number;
+  images: ProductImage[];
+  /** Variation axis — the only one the storefront supports today. */
+  finishes: string[];
+  specs: ProductSpec[];
+  specSheetUrl?: string;
+  installationAvailable: boolean;
+  installationPrice?: number;
+  /** The central commerce rule: `buy` shows price + cart actions, `poa` hides price and shows enquiry actions. */
+  purchaseMode: PurchaseMode;
+  /** USD. Present only when purchaseMode === 'buy'. */
+  price?: number;
   compareAtPrice?: number;
-  images: string[];
-  category: Category | string;
+  availability: string;
   stock: number;
-  isActive: boolean;
-  tags: string[];
-  createdAt: string;
-  updatedAt: string;
+  relatedProductIds: string[];
+  bundleIds?: string[];
+  updatedAt?: string;
 }
 
 export interface ProductListResponse {
@@ -30,14 +58,18 @@ export interface ProductListResponse {
   totalPages: number;
 }
 
-export interface CartItem {
-  product: Product;
+export interface CartLine {
+  productId: string;
+  finish?: string;
   quantity: number;
-  price: number;
+  installation: boolean;
+  unitPrice: number;
+  lineTotal: number;
 }
 
-export interface Cart {
-  _id: string;
-  user: string;
-  items: CartItem[];
+export interface CartSummary {
+  subtotal: number;
+  installationTotal: number;
+  delivery: number | 'quote';
+  total: number;
 }

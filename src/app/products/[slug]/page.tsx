@@ -4,7 +4,6 @@ import { getProductBySlug } from '@/lib/products';
 import ProductDetail from '@/features/products/components/ProductDetail';
 import JsonLd from '@/features/layout/components/JsonLd';
 import { SITE_NAME, SITE_URL } from '@/lib/site';
-import { Category } from '@/lib/types';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -48,7 +47,6 @@ export default async function ProductPage({ params }: Props) {
 
   if (!product) notFound();
 
-  const category = typeof product.category === 'object' ? (product.category as Category) : null;
   const url = `${SITE_URL}/products/${product.slug}`;
 
   const productJsonLd = {
@@ -56,19 +54,23 @@ export default async function ProductPage({ params }: Props) {
     '@type': 'Product',
     name: product.name,
     description: product.description ?? undefined,
-    image: product.images.length > 0 ? product.images : undefined,
-    sku: product._id,
-    category: category?.name,
-    offers: {
-      '@type': 'Offer',
-      url,
-      priceCurrency: 'USD',
-      price: product.price,
-      availability:
-        product.stock > 0
-          ? 'https://schema.org/InStock'
-          : 'https://schema.org/OutOfStock',
-    },
+    image: product.images.length > 0 ? product.images.map((img) => img.url) : undefined,
+    sku: product.reference ?? product.id,
+    category: product.category,
+    brand: product.brand ? { '@type': 'Brand', name: product.brand } : undefined,
+    offers:
+      product.purchaseMode === 'buy'
+        ? {
+            '@type': 'Offer',
+            url,
+            priceCurrency: 'USD',
+            price: product.price,
+            availability:
+              product.stock > 0
+                ? 'https://schema.org/InStock'
+                : 'https://schema.org/OutOfStock',
+          }
+        : undefined,
   };
 
   const breadcrumbJsonLd = {

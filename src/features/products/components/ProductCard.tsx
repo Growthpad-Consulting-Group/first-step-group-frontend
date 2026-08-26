@@ -5,12 +5,14 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Product } from '@/lib/types';
 import { useCart } from '@/features/cart/context/cart-context';
+import InquireButton from '@/shared/ui/InquireButton';
 
 const formatPrice = (value: number) =>
   new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
 
 export default function ProductCard({ product }: { product: Product }) {
   const { addItem } = useCart();
+  const isPoa = product.purchaseMode === 'poa';
 
   return (
     <motion.div
@@ -24,8 +26,8 @@ export default function ProductCard({ product }: { product: Product }) {
         <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl bg-cream-dark dark:bg-slate-dark">
           {product.images[0] ? (
             <Image
-              src={product.images[0]}
-              alt={product.name}
+              src={product.images[0].url}
+              alt={product.images[0].alt ?? product.name}
               fill
               className="object-cover transition-transform duration-500 group-hover:scale-105"
               sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
@@ -35,6 +37,11 @@ export default function ProductCard({ product }: { product: Product }) {
               No image
             </div>
           )}
+          {isPoa && (
+            <span className="absolute left-3 top-3 rounded-full bg-ink/80 px-3 py-1 text-[11px] font-medium uppercase tracking-wide text-cream">
+              Showroom product
+            </span>
+          )}
         </div>
       </Link>
 
@@ -43,25 +50,31 @@ export default function ProductCard({ product }: { product: Product }) {
           <Link href={`/products/${product.slug}`}>
             <h3 className="text-sm font-medium">{product.name}</h3>
           </Link>
-          <div className="mt-1 flex items-center gap-2 text-sm">
-            <span className="font-medium text-slate dark:text-cream">
-              {formatPrice(product.price)}
-            </span>
-            {product.compareAtPrice && (
-              <span className="text-ink-light line-through">
-                {formatPrice(product.compareAtPrice)}
+          {!isPoa && (
+            <div className="mt-1 flex items-center gap-2 text-sm">
+              <span className="font-medium text-slate dark:text-cream">
+                {formatPrice(product.price ?? 0)}
               </span>
-            )}
-          </div>
+              {product.compareAtPrice && (
+                <span className="text-ink-light line-through">
+                  {formatPrice(product.compareAtPrice)}
+                </span>
+              )}
+            </div>
+          )}
         </div>
 
-        <button
-          onClick={() => addItem(product)}
-          disabled={product.stock === 0}
-          className="mt-0.5 rounded-md border border-gold/40 px-3 py-1.5 text-xs font-medium text-ink transition-colors hover:border-gold hover:bg-gold hover:text-ink disabled:cursor-not-allowed disabled:opacity-40 dark:border-gold/30 dark:text-white dark:hover:bg-gold dark:hover:text-ink"
-        >
-          {product.stock === 0 ? 'Sold out' : 'Add'}
-        </button>
+        {isPoa ? (
+          <InquireButton className="mt-0.5 flex px-3 py-1.5 text-xs" />
+        ) : (
+          <button
+            onClick={() => addItem(product)}
+            disabled={product.stock === 0}
+            className="mt-0.5 rounded-md border border-gold/40 px-3 py-1.5 text-xs font-medium text-ink transition-colors hover:border-gold hover:bg-gold hover:text-ink disabled:cursor-not-allowed disabled:opacity-40 dark:border-gold/30 dark:text-white dark:hover:bg-gold dark:hover:text-ink"
+          >
+            {product.stock === 0 ? 'Sold out' : 'Add'}
+          </button>
+        )}
       </div>
     </motion.div>
   );

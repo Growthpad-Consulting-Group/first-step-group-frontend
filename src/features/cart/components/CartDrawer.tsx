@@ -49,12 +49,12 @@ export default function CartDrawer() {
               ) : (
                 <ul className="flex flex-col gap-6">
                   {items.map((item) => (
-                    <li key={item.product._id} className="flex gap-4">
+                    <li key={item.product.id} className="flex gap-4">
                       <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-lg bg-cream-dark dark:bg-slate-dark">
                         {item.product.images[0] && (
                           <Image
-                            src={item.product.images[0]}
-                            alt={item.product.name}
+                            src={item.product.images[0].url}
+                            alt={item.product.images[0].alt ?? item.product.name}
                             fill
                             className="object-cover"
                           />
@@ -64,7 +64,7 @@ export default function CartDrawer() {
                         <div className="flex items-start justify-between gap-2">
                           <p className="text-sm font-medium">{item.product.name}</p>
                           <button
-                            onClick={() => removeItem(item.product._id)}
+                            onClick={() => removeItem(item.product.id)}
                             className="text-ink-light hover:text-red-500"
                             aria-label="Remove item"
                           >
@@ -72,12 +72,12 @@ export default function CartDrawer() {
                           </button>
                         </div>
                         <p className="text-sm text-slate dark:text-cream-dark">
-                          {formatPrice(item.product.price)}
+                          {formatPrice(item.product.price ?? 0)}
                         </p>
                         <div className="mt-1 flex w-fit items-center gap-3 rounded-md border border-black/10 px-2 py-1 dark:border-white/20">
                           <button
                             onClick={() =>
-                              updateQuantity(item.product._id, Math.max(1, item.quantity - 1))
+                              updateQuantity(item.product.id, Math.max(1, item.quantity - 1))
                             }
                             aria-label="Decrease quantity"
                           >
@@ -87,7 +87,7 @@ export default function CartDrawer() {
                             {item.quantity}
                           </span>
                           <button
-                            onClick={() => updateQuantity(item.product._id, item.quantity + 1)}
+                            onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
                             aria-label="Increase quantity"
                           >
                             <Icon icon="solar:add-circle-linear" className="h-3 w-3" />

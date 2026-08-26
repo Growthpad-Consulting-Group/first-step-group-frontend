@@ -52,11 +52,14 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   }, [items]);
 
   const addItem = useCallback((product: Product, quantity = 1) => {
+    if (product.purchaseMode !== 'buy') {
+      throw new Error(`Cannot add a POA product to the cart: ${product.slug}`);
+    }
     setItems((prev) => {
-      const existing = prev.find((item) => item.product._id === product._id);
+      const existing = prev.find((item) => item.product.id === product.id);
       if (existing) {
         return prev.map((item) =>
-          item.product._id === product._id
+          item.product.id === product.id
             ? { ...item, quantity: item.quantity + quantity }
             : item,
         );
@@ -67,13 +70,13 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const removeItem = useCallback((productId: string) => {
-    setItems((prev) => prev.filter((item) => item.product._id !== productId));
+    setItems((prev) => prev.filter((item) => item.product.id !== productId));
   }, []);
 
   const updateQuantity = useCallback((productId: string, quantity: number) => {
     setItems((prev) =>
       prev.map((item) =>
-        item.product._id === productId ? { ...item, quantity } : item,
+        item.product.id === productId ? { ...item, quantity } : item,
       ),
     );
   }, []);
@@ -86,7 +89,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   );
 
   const totalPrice = useMemo(
-    () => items.reduce((sum, item) => sum + item.product.price * item.quantity, 0),
+    () => items.reduce((sum, item) => sum + (item.product.price ?? 0) * item.quantity, 0),
     [items],
   );
 
