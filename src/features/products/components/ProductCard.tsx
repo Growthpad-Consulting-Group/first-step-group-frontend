@@ -56,6 +56,11 @@ export default function ProductCard({
 
       <div className="mt-4 flex items-start justify-between gap-2">
         <div>
+          {featured && product.category && (
+            <p className="text-xs font-semibold uppercase tracking-widest text-gold-dark">
+              {product.category}
+            </p>
+          )}
           <Link href={`/product/${product.slug}`}>
             <h3 className={featured ? 'text-lg font-medium' : 'text-sm font-medium'}>
               {product.name}

@@ -65,7 +65,9 @@ const DEPARTMENTS = [
 ];
 
 function findAttributeOptions(product: WooProduct, name: string): string[] {
-  return product.attributes?.find((a) => a.name.toLowerCase() === name.toLowerCase())?.options ?? [];
+  const options =
+    product.attributes?.find((a) => a.name.toLowerCase() === name.toLowerCase())?.options ?? [];
+  return options.map(decodeHtmlEntities);
 }
 
 function findMetaValue(product: WooProduct, key: string): string | undefined {
@@ -73,8 +75,23 @@ function findMetaValue(product: WooProduct, key: string): string | undefined {
   return typeof entry?.value === 'string' && entry.value ? entry.value : undefined;
 }
 
+/** Woo's REST API returns text fields (names, categories, attribute options) HTML-entity
+ *  encoded — e.g. "Bathroom &amp; Wet Rooms" — which breaks both string-equality checks
+ *  (like matching against DEPARTMENTS) and display. Decode before using a value either way. */
+function decodeHtmlEntities(text: string): string {
+  return text
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#0?39;/g, "'")
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&#(\d+);/g, (_, code: string) => String.fromCharCode(Number(code)))
+    .replace(/&#x([0-9a-f]+);/gi, (_, hex: string) => String.fromCharCode(parseInt(hex, 16)));
+}
+
 function stripHtml(html: string): string {
-  return html.replace(/<[^>]+>/g, '').trim();
+  return decodeHtmlEntities(html.replace(/<[^>]+>/g, '')).trim();
 }
 
 function mapProduct(wc: WooProduct): Product {
@@ -82,8 +99,12 @@ function mapProduct(wc: WooProduct): Product {
   const purchaseModeOption = findAttributeOptions(wc, 'Purchase Mode')[0]?.toLowerCase();
   const purchaseMode: PurchaseMode = purchaseModeOption === 'poa' ? 'poa' : 'buy';
 
-  const department = wc.categories.find((c) => DEPARTMENTS.includes(c.name))?.name;
-  const category = wc.categories[0]?.name ?? 'Uncategorized';
+  const categoryNames = wc.categories.map((c) => decodeHtmlEntities(c.name));
+  const department = categoryNames.find((name) => DEPARTMENTS.includes(name));
+  // Prefer the specific sub-category (e.g. "Baths") over the department name for display —
+  // products are assigned both, and categories[0] isn't reliably the more specific one.
+  const category =
+    categoryNames.find((name) => !DEPARTMENTS.includes(name)) ?? categoryNames[0] ?? 'Uncategorized';
   const brand = findAttributeOptions(wc, 'Brand')[0];
   const finishes = findAttributeOptions(wc, 'Finish');
   const installationOptions = findAttributeOptions(wc, 'Installation');
@@ -92,14 +113,17 @@ function mapProduct(wc: WooProduct): Product {
   return {
     id: String(wc.id),
     slug: wc.slug,
-    name: wc.name,
+    name: decodeHtmlEntities(wc.name),
     brand,
     department,
     category,
     reference: wc.sku || undefined,
     summary: wc.short_description ? stripHtml(wc.short_description) : undefined,
     description: wc.description ? stripHtml(wc.description) : undefined,
-    images: (wc.images ?? []).map((img) => ({ url: img.src, alt: img.alt || wc.name })),
+    images: (wc.images ?? []).map((img) => ({
+      url: img.src,
+      alt: (img.alt && decodeHtmlEntities(img.alt)) || decodeHtmlEntities(wc.name),
+    })),
     finishes,
     specs: [],
     specSheetUrl: findMetaValue(wc, '_spec_sheet_url'),
@@ -121,9 +145,9 @@ function mapProduct(wc: WooProduct): Product {
 function mapCategory(wc: WooCategory): Category {
   return {
     id: String(wc.id),
-    name: wc.name,
+    name: decodeHtmlEntities(wc.name),
     slug: wc.slug,
-    description: wc.description || undefined,
+    description: wc.description ? decodeHtmlEntities(wc.description) : undefined,
     image: wc.image?.src,
     parentId: wc.parent ? String(wc.parent) : undefined,
   };

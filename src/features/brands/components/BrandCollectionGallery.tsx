@@ -1,6 +1,6 @@
 import type { Brand } from '@/data/brands';
 import type { Product } from '@/lib/types';
-import ProductCard from '@/features/products/components/ProductCard';
+import BrandProductCard from './BrandProductCard';
 
 export default function BrandCollectionGallery({
   brand,
@@ -32,9 +32,9 @@ export default function BrandCollectionGallery({
             No {brand.name} products in the catalogue yet.
           </p>
         ) : (
-          <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
             {products.map((product) => (
-              <ProductCard key={product.id} product={product} />
+              <BrandProductCard key={product.id} product={product} />
             ))}
           </div>
         )}
