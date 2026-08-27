@@ -16,6 +16,10 @@ export interface Brand {
   storyHeading?: string;
   storyDescription?: string;
   features?: BrandFeature[];
+  /** Editorial heading + description for the "Selected for First Step" collection gallery
+   *  intro (frame 04/05). Only populated where real per-brand copy exists in Figma. */
+  galleryHeading?: string;
+  galleryDescription?: string;
 }
 
 /**
@@ -51,6 +55,9 @@ export const BRANDS: Brand[] = [
         description: 'Modern and Victorian forms refined by skilled hands.',
       },
     ],
+    galleryHeading: 'Sculptural form. Made for ritual.',
+    galleryDescription:
+      'Explore freestanding baths and basins shaped with architectural lightness and hand-finished character.',
   },
   {
     slug: 'kohler',

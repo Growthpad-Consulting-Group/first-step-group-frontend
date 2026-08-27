@@ -18,13 +18,20 @@ export default function BrandCollectionGallery({
               {brand.name} Collection
             </p>
             <h3 className="font-display mt-3 max-w-xl text-2xl font-light uppercase tracking-tight text-ink sm:text-3xl">
-              Selected for First Step
+              {brand.galleryHeading ?? 'Selected for First Step'}
             </h3>
           </div>
-          <p className="max-w-md text-base leading-relaxed text-ink-light">
-            Explore the {brand.name} pieces chosen for their design integrity and everyday
-            performance.
-          </p>
+          <div className="max-w-md">
+            <p className="text-base leading-relaxed text-ink-light">
+              {brand.galleryDescription ??
+                `Explore the ${brand.name} pieces chosen for their design integrity and everyday performance.`}
+            </p>
+            {brand.galleryHeading && (
+              <p className="mt-3 text-xs font-semibold uppercase tracking-widest text-gold-dark">
+                Selected for First Step
+              </p>
+            )}
+          </div>
         </div>
 
         {products.length === 0 ? (
