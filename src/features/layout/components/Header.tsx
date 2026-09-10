@@ -59,6 +59,7 @@ export default function Header() {
 
         <div className="flex items-center justify-end gap-3">
           <InquireButton
+            href="/contact"
             icon="solar:arrow-right-linear"
             iconPosition="right"
             className="hidden px-7 py-3.5 text-sm sm:inline-flex"
@@ -135,6 +136,7 @@ export default function Header() {
                       className="mt-6 flex flex-col gap-3"
                     >
                       <InquireButton
+                        href="/contact"
                         onClick={() => setMobileOpen(false)}
                         className="inline-flex px-7 py-3.5 text-sm"
                       />

@@ -6,6 +6,7 @@ interface InquireButtonProps {
   className?: string;
   icon?: string;
   iconPosition?: 'left' | 'right';
+  href?: string;
 }
 
 export default function InquireButton({
@@ -13,10 +14,11 @@ export default function InquireButton({
   className = '',
   icon = 'bi:chat-left-text',
   iconPosition = 'left',
+  href = '/enquire',
 }: InquireButtonProps) {
   return (
     <Link
-      href="/enquire"
+      href={href}
       onClick={onClick}
       className={`items-center justify-center gap-2 rounded-xs bg-gold font-semibold uppercase tracking-widest text-ink transition-colors hover:bg-gold-light ${className}`}
     >
